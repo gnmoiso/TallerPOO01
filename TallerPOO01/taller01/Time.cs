@@ -116,8 +116,108 @@ namespace taller01
         }
 
         //Public Methods
+        public int ToMilliseconds()
+        {
+            if (Hour < 0 || Hour > 23 ||
+                Minute < 0 || Minute > 59 ||
+                Second < 0 || Second > 59 ||
+                Milliseconds < 0 || Milliseconds > 999)
+            {
+                return 0;
+            }
+
+            return (Hour * 3600000) + (Minute * 60000) + (Second * 1000) + Milliseconds;
+        }
+
+        public int ToSeconds()
+        {
+            if (Hour < 0 || Hour > 23 ||
+                Minute < 0 || Minute > 59 ||
+                Second < 0 || Second > 59)
+            {
+                return 0;
+            }
+            return (Hour * 3600) + (Minute * 60) + Second;
+        }
+
+        public int ToMinutes()
+        {
+            if (Hour < 0 || Hour > 23 ||
+                Minute < 0 || Minute > 59)
+            {
+                return 0;
+            }
+
+            return (Hour * 60) + Minute;
+        }
+
+        public bool IsOtherDay(Time other)
+        {
+            int thisTotalMs = ToMilliseconds();
+            int otherTotalMs = other.ToMilliseconds();
+
+            int oneDayMs = 24 * 60 * 60 * 1000;
+
+            return (thisTotalMs + otherTotalMs) >= oneDayMs ? true : false;
+        }
+
+        public Time Add(Time other)
+        {
+            int totalMs = Milliseconds + other.Milliseconds;
+            int totalSec = Second + other.Second;
+            int totalMin = Minute + other.Minute;
+            int totalHour = Hour + other.Hour;
+
+            if (totalMs >= 1000)
+            {
+                totalSec += totalMs / 1000;
+                totalMs %= 1000;
+            }
+
+            if (totalSec >= 60)
+            {
+                totalMin += totalSec / 60;
+                totalSec %= 60;
+            }
+
+            if (totalMin >= 60)
+            {
+                totalHour += totalMin / 60;
+                totalMin %= 60;
+            }
+
+            totalHour %= 24;
 
 
+            return new Time(totalHour, totalMin, totalSec, totalMs);
+        }
+
+        public override string ToString()
+        {
+            int displayHour = Hour;
+            string tt = String.Empty;
+
+            if (displayHour == 0)
+            {
+                displayHour = 12;
+                tt = "AM";
+            }
+            else if (displayHour < 12)
+            {
+                tt = "AM";
+            }
+            else if (displayHour == 12)
+            {
+                tt = "PM";
+            }
+            else
+            {
+                displayHour -= 12;
+                tt = "PM";
+            }
+
+            return $"{displayHour:00}:{Minute:00}:{Second:00}.{Milliseconds:000} {tt}";
+        }
 
     }
 
