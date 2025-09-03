@@ -12,7 +12,7 @@ namespace taller01
         private int _hour;
         private int _minute;
         private int _second;
-        private int _millisecond;
+        private int _milliseconds;
 
         // builders
         public Time ()
@@ -20,7 +20,7 @@ namespace taller01
             _hour = 0;
             _minute = 0;
             _second = 0;
-            _millisecond = 0;
+            _milliseconds = 0;
         }
         public Time (int hour)
         {
@@ -45,7 +45,7 @@ namespace taller01
             _hour = hour;
             _minute = minute;
             _second = second;
-            _millisecond = milliseconds;
+            _milliseconds = milliseconds;
         }
 
         //Atributes
@@ -67,44 +67,58 @@ namespace taller01
             }
         }
 
-        public int second
+        public int Second
         {
             get => _second;
             set
             {
-                second = ValidSecond(value);
+                Second = ValidSecond(value);
             }
         }
 
 
-        public int Millisecond
+        public int Milliseconds
         {
-            get => _millisecond;
+            get => _milliseconds;
             set
             {
-                Millisecond = ValidMillisecond(value);
+                Milliseconds = ValidMillisecond(value);
             }
         }
 
 
-        private int ValidSecond(int value)
+        //Private Methods
+        private int ValidSecond(int milliseconds)
         {
-            throw new NotImplementedException();
+            if (milliseconds < 0 || milliseconds > 999)
+                throw new Exception($"The Miliseconds {milliseconds} isn´t valid");
+            return milliseconds;
         }
-        private int ValidMillisecond(int value)
+        private int ValidMillisecond(int second)
         {
-            throw new NotImplementedException();
+            if (second < 0 || second > 59)
+                throw new Exception($"The Second {second} isn´t valid");
+            return second;
         }
 
-        private int ValidMinute(int value)
+        private int ValidMinute(int minute)
         {
-            throw new NotImplementedException();
+            if (minute < 0 || minute > 59)
+                throw new Exception($"The Minute {minute} isn´t valid");
+            return minute;
         }
 
-        private int ValidHour(int value)
+        private int ValidHour(int hour)
         {
-            throw new NotImplementedException();
+            if (hour < 0 || hour > 23)
+                throw new Exception($"The Hour {hour} isn´t valid");
+            return hour;
         }
+
+        //Public Methods
+
+
+
     }
 
        
