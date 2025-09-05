@@ -158,7 +158,7 @@ namespace taller01
 
             int oneDayMs = 24 * 60 * 60 * 1000;
 
-            return (thisTotalMs + otherTotalMs) >= oneDayMs ? true : false;
+            return (thisTotalMs + otherTotalMs) >= oneDayMs;
         }
 
         public Time Add(Time other)
