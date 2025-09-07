@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace taller01
 {
-    internal class Time
+    public class Time
     {
         // Camps
         private int _hour;
@@ -88,13 +88,13 @@ namespace taller01
 
 
         //Private Methods
-        private int ValidSecond(int milliseconds)
+        private int ValidMillisecond(int milliseconds)
         {
             if (milliseconds < 0 || milliseconds > 999)
                 throw new Exception($"The Miliseconds {milliseconds} isn´t valid");
             return milliseconds;
         }
-        private int ValidMillisecond(int second)
+        private int ValidSecond(int second)
         {
             if (second < 0 || second > 59)
                 throw new Exception($"The Second {second} isn´t valid");
